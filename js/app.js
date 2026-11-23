@@ -200,6 +200,8 @@ async function cekStatus() {
   $("#statusMode").innerHTML = S.ai
     ? `<b>● Mode AI aktif</b>Pasien &amp; penilaian oleh Claude`
     : `<b>💾 Progres tersimpan</b>di browser perangkat ini`;
+  const versi = document.querySelector('meta[name="versi"]')?.content;
+  if (versi && versi !== "lokal") $("#statusMode").innerHTML += `<small class="versi">Versi ${esc(versi.replace(/^(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})$/, "$3/$2/$1 $4.$5"))}</small>`;
 }
 
 // ======================= Beranda =======================
