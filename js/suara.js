@@ -10,6 +10,35 @@ try {
   if (navigator.brave?.isBrave) isBrave = await navigator.brave.isBrave();
 } catch { /* abaikan */ }
 
+const rapikan = (s) => String(s || "").replace(/\s+/g, " ").trim();
+const kecil = (s) => rapikan(s).toLowerCase().replace(/[.,!?]/g, "");
+
+/**
+ * Menggabungkan potongan hasil pengenalan suara tanpa pengulangan.
+ * Chrome di Android sering mengirim potongan yang bersifat kumulatif
+ * ("Apakah", "Apakah keluarga", "Apakah keluarga ada …") atau mengulang potongan sebelumnya,
+ * sedangkan Chrome desktop mengirim potongan yang saling menyambung. Keduanya ditangani di sini.
+ */
+export function gabungTranskrip(potongan) {
+  let hasil = "";
+  for (const p of potongan) {
+    const t = rapikan(p);
+    if (!t) continue;
+    const a = kecil(hasil), b = kecil(t);
+    if (!a) { hasil = t; continue; }
+    if (b.startsWith(a)) { hasil = t; continue; } // potongan baru memuat seluruh teks sebelumnya
+    if (a.endsWith(b)) continue; // potongan yang sama terkirim ulang
+    // potongan baru mengulang ekor teks sebelumnya lalu melanjutkan: sambung tanpa mengulang
+    const kataA = hasil.split(" "), kataB = t.split(" ");
+    let tumpang = 0;
+    for (let n = Math.min(kataA.length, kataB.length); n > 0; n--) {
+      if (kecil(kataA.slice(-n).join(" ")) === kecil(kataB.slice(0, n).join(" "))) { tumpang = n; break; }
+    }
+    hasil = rapikan(`${hasil} ${kataB.slice(tumpang).join(" ")}`);
+  }
+  return hasil;
+}
+
 /**
  * Perekam suara kontinu berbahasa Indonesia.
  * onTeks(teks)  : dipanggil tiap ada hasil (termasuk sementara)
@@ -33,14 +62,9 @@ export class Perekam {
     rec.continuous = true;
     rec.interimResults = true;
     rec.onresult = (e) => {
-      let fin = "";
-      let inter = "";
-      for (let i = 0; i < e.results.length; i++) {
-        const r = e.results[i];
-        if (r.isFinal) fin += r[0].transcript + " ";
-        else inter += r[0].transcript;
-      }
-      const teks = `${this.base} ${fin} ${inter}`.replace(/\s+/g, " ").trim();
+      const potongan = [];
+      for (let i = 0; i < e.results.length; i++) potongan.push(e.results[i][0].transcript);
+      const teks = gabungTranskrip([this.base, ...potongan]);
       this.teksTerakhir = teks;
       this.o.onTeks?.(teks);
       clearTimeout(this.timer);
