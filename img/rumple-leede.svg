@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <linearGradient id="arm2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b97d58"/>
+      <stop offset=".5" stop-color="#e2ad86"/>
+      <stop offset="1" stop-color="#b97d58"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="380" fill="#eef2f5"/>
+  <!-- lengan atas + bawah (vertikal) -->
+  <path d="M250 0 L390 0 L380 170 Q378 190 370 200 L360 380 L270 380 L262 200 Q254 190 252 170 Z" fill="url(#arm2)" stroke="#a46c4a" stroke-width="2"/>
+  <!-- manset tensimeter -->
+  <rect x="236" y="40" width="168" height="90" rx="10" fill="#3a5a80"/>
+  <rect x="236" y="40" width="168" height="90" rx="10" fill="none" stroke="#24405f" stroke-width="3"/>
+  <path d="M404 80 Q470 70 500 30" stroke="#24405f" stroke-width="5" fill="none"/>
+  <circle cx="512" cy="26" r="18" fill="#fff" stroke="#24405f" stroke-width="3"/>
+  <line x1="512" y1="26" x2="522" y2="16" stroke="#c62828" stroke-width="2.5"/>
+  <!-- fossa kubiti + kotak 2,5 cm -->
+  <path d="M276 196 Q320 208 362 196" stroke="#a46c4a" stroke-width="2" fill="none"/>
+  <rect x="280" y="215" width="76" height="76" fill="none" stroke="#1f3a5f" stroke-width="2.5" stroke-dasharray="7 5"/>
+  <g fill="#b0161b">
+    <circle cx="290" cy="226" r="2.6"/><circle cx="304" cy="232" r="2.3"/><circle cx="318" cy="224" r="2.5"/><circle cx="333" cy="230" r="2.2"/>
+    <circle cx="346" cy="226" r="2.4"/><circle cx="292" cy="246" r="2.2"/><circle cx="308" cy="252" r="2.6"/><circle cx="324" cy="244" r="2.3"/>
+    <circle cx="340" cy="250" r="2.5"/><circle cx="296" cy="266" r="2.4"/><circle cx="312" cy="270" r="2.1"/><circle cx="328" cy="262" r="2.6"/>
+    <circle cx="344" cy="270" r="2.2"/><circle cx="290" cy="282" r="2.3"/><circle cx="306" cy="284" r="2.5"/><circle cx="322" cy="280" r="2.2"/>
+    <circle cx="338" cy="284" r="2.4"/><circle cx="350" cy="258" r="2.0"/>
+    <circle cx="276" cy="306" r="2.2"/><circle cx="356" cy="312" r="2.0"/><circle cx="300" cy="330" r="2.3"/><circle cx="340" cy="340" r="2.1"/>
+  </g>
+  <g font-size="14" fill="#13243a">
+    <line x1="356" y1="250" x2="440" y2="230" stroke="#1f3a5f" stroke-width="1.5"/>
+    <rect x="440" y="200" width="188" height="64" rx="8" fill="#fff"/>
+    <text x="452" y="222" font-weight="600">± 18 petekie</text>
+    <text x="452" y="240">dalam 2,5 × 2,5 cm</text>
+    <text x="452" y="256">(positif bila ≥ 10)</text>
+    <rect x="12" y="150" width="215" height="92" rx="8" fill="#fff"/>
+    <text x="24" y="172" font-weight="600">Uji tourniquet (Rumple Leede)</text>
+    <text x="24" y="192">Manset dipompa di antara</text>
+    <text x="24" y="210">sistolik &amp; diastolik, 5 menit;</text>
+    <text x="24" y="228">hitung petekie di fossa kubiti</text>
+  </g>
+  <text x="12" y="370" font-size="12" fill="#45566b">Ilustrasi skematik, bukan foto klinis</text>
+</svg>
